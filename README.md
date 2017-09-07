@@ -1,5 +1,6 @@
 # spi
 Summed Point Influences
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.887367.svg)](https://doi.org/10.5281/zenodo.887367)
 
 This is the Summed Point Influences tool, written using arcgis 9.3 geoprocressing in 2011 and tweaked slightly in 2013. This repository will serve as the basis for developing the next generation of the tool. Feel free to branch and submit pull requests.
 
