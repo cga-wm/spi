@@ -85,10 +85,14 @@ def getNoDataFeatures(raster, features, gp):
    elif gp.Describe(features).shapeType == "Polygon":
       fdesc = gp.Describe(features)
       gp.PolygonToRaster_conversion(features, fdesc.OIDFieldName, "pr")
-      gp.DeleteRasterAttributeTable_management("pr")
-      gp.ExtractByMask("pr", raster, "polyraster")
+      gp.BuildRasterAttributeTable_management("pr")
+      # gp.DeleteRasterAttributeTable_management("pr")
+      # pr2 = r'C:\Users\kfisher\Documents\Asia\Mongolia\poaching\data\spi\pr2.tif'
+      pr2 = 'pr2'
+      gp.ExtractByMask("pr", raster, pr2)
+      # gp.BuildRasterAttributeTable_management("pr2")
       gp.Delete("pr")
-      gp.MakeRasterLayer_management("polyraster", "polyrasterlyr")
+      gp.MakeRasterLayer_management(pr2, "polyrasterlyr")
       fcs = gp.SearchCursor(features)
       fc = fcs.Next()
       while fc:
