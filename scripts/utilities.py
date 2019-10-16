@@ -75,9 +75,10 @@ def getNoDataFeatures(raster, features, gp):
       gp.Sample(raster, features, os.path.dirname(raster) + os.sep + "pointsSample")
       pointVals = gp.SearchCursor(os.path.dirname(raster) + os.sep + "pointsSample")
       pointVal = pointVals.Next()
+      rastercol = os.path.splitext(os.path.basename(raster))[0].upper()
+      featcol = os.path.splitext(os.path.basename(features))[0].upper()
       while pointVal:
-         #if pointVal.GetValue("RASTERVALU") <= 0: noDataPoints.append(pointVal.GetValue("MASK"))
-         if pointVal.GetValue(os.path.splitext(os.path.basename(raster))[0]) <= 0: noDataPoints.append(pointVal.GetValue("MASK"))
+         if pointVal.GetValue(rastercol) <= 0: noDataPoints.append(pointVal.GetValue(featcol))
          pointVal = pointVals.Next()
       gp.Delete(os.path.dirname(raster) + os.sep + "pointsSample")
    
@@ -85,14 +86,10 @@ def getNoDataFeatures(raster, features, gp):
    elif gp.Describe(features).shapeType == "Polygon":
       fdesc = gp.Describe(features)
       gp.PolygonToRaster_conversion(features, fdesc.OIDFieldName, "pr")
-      gp.BuildRasterAttributeTable_management("pr")
-      # gp.DeleteRasterAttributeTable_management("pr")
-      # pr2 = r'C:\Users\kfisher\Documents\Asia\Mongolia\poaching\data\spi\pr2.tif'
-      pr2 = 'pr2'
-      gp.ExtractByMask("pr", raster, pr2)
-      # gp.BuildRasterAttributeTable_management("pr2")
+      gp.DeleteRasterAttributeTable_management("pr")
+      gp.ExtractByMask("pr", raster, "polyraster")
       gp.Delete("pr")
-      gp.MakeRasterLayer_management(pr2, "polyrasterlyr")
+      gp.MakeRasterLayer_management("polyraster", "polyrasterlyr")
       fcs = gp.SearchCursor(features)
       fc = fcs.Next()
       while fc:
@@ -102,7 +99,7 @@ def getNoDataFeatures(raster, features, gp):
       del fc, fcs
       gp.Delete("polyraster")
       
-   return noDataPoints
+   return sorted(noDataPoints)
 
 # Zip a directory recursively
 def recursive_zip(zipf, directory, folder = ""): #gp, 
