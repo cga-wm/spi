@@ -38,7 +38,7 @@ try:
 
 ## SETUP ##
    
-   import arcgisscripting, os, re, utilities as util, spiExceptions as spie
+   import arcgisscripting, os, re, time, utilities as util, spiExceptions as spie
    gp = arcgisscripting.create(9.3)
    gp.overWriteOutput = 1
    if gp.CheckExtension("spatial") != "Available": raise spie.spiException("LicenseError", gp)
@@ -172,11 +172,12 @@ try:
       gp.SelectLayerByAttribute_management(feats, "NEW_SELECTION", '"' + featsDesc.OIDFieldName + '" = ' + featID)
       
       # Figure cost distance for single feat
+      time.sleep(1)
       gp.CostDistance(feats, cost, costDist + featID)
-      
+
       # Get maximum distance of cost distance raster
       costDistMax = float(gp.GetRasterProperties(costDist + featID, "MAXIMUM").GetOutput(0))
-      
+
       # If user has set upper limit for cost, set all cells above that limit to it
       if costDistMax > maxCostDistance and maxCostDistance != 0:
          gp.SingleOutputMapAlgebra("con(" + costDist + featID + " > " + str(maxCostDistance) + ", " + str(maxCostDistance) + ", " + costDist + featID + ")", costDist + "temp")

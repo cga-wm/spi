@@ -75,9 +75,10 @@ def getNoDataFeatures(raster, features, gp):
       gp.Sample(raster, features, os.path.dirname(raster) + os.sep + "pointsSample")
       pointVals = gp.SearchCursor(os.path.dirname(raster) + os.sep + "pointsSample")
       pointVal = pointVals.Next()
+      rastercol = os.path.splitext(os.path.basename(raster))[0].upper()
+      featcol = os.path.splitext(os.path.basename(features))[0].upper()
       while pointVal:
-         #if pointVal.GetValue("RASTERVALU") <= 0: noDataPoints.append(pointVal.GetValue("MASK"))
-         if pointVal.GetValue(os.path.splitext(os.path.basename(raster))[0]) <= 0: noDataPoints.append(pointVal.GetValue("MASK"))
+         if pointVal.GetValue(rastercol) <= 0: noDataPoints.append(pointVal.GetValue(featcol))
          pointVal = pointVals.Next()
       gp.Delete(os.path.dirname(raster) + os.sep + "pointsSample")
    
@@ -98,7 +99,7 @@ def getNoDataFeatures(raster, features, gp):
       del fc, fcs
       gp.Delete("polyraster")
       
-   return noDataPoints
+   return sorted(noDataPoints)
 
 # Zip a directory recursively
 def recursive_zip(zipf, directory, folder = ""): #gp, 
