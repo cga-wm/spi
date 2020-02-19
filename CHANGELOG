@@ -1,0 +1,25 @@
+2020-02-11  VERSION 2.0
+            - abandon command line; go all in on .pyt toolbox (TWD)
+            - add SPI output raster to current map (TWD)
+
+            !!! NOTE: an 'if name is main' block will run during toolbox import
+                      removed, viola, it runs!
+            !!! NOTE: tool class is instantiated when tool is added to ArcPro;
+                      therefore, creating the absolute directory paths in the
+                      class's __init__;
+                      TODO: this needs a-fixing!
+            !!! NOTE: toolbox crashes when a ./Data directory does not exist;
+                      TODO: this needs a-fixing!
+
+2020-02-11  VERSION 1.2-arcpy
+            - add progress messages (TWD)
+            - add parameter maker functions (TWD)
+                - https://pro.arcgis.com/en/pro-app/arcpy/geoprocessing_and_python/defining-parameters-in-a-python-toolbox.htm
+            - fix issues with project and map references (TWD)
+
+2020-02-10  VERSION 1.1-arcpy
+            - update class structure and syntax for arcgis pro toolbox (TWD)
+                - https://pro.arcgis.com/en/pro-app/arcpy/geoprocessing_and_python/creating-a-new-python-toolbox.htm
+
+2020-02-06  VERSION 1.0-arcpy
+            - convert arcgisscripting to arcpy (TWD)

@@ -1,10 +1,27 @@
-# spi
-Summed Point Influences
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.887367.svg)](https://doi.org/10.5281/zenodo.887367)
+# README
+--------
+* LAST UPDATED: 2020-02-19
+* ORGANIZATION: cga-wm
+* REPOSITORY: cga-wm.github.io/spi
 
-This is the Summed Point Influences tool, written using arcgis 9.3 geoprocressing in 2011 and tweaked slightly in 2013. This repository will serve as the basis for developing the next generation of the tool. Feel free to branch and submit pull requests.  
-2.6.20: merged in tweaks for fixing mysterious ERROR 99999 problems
+## DESCRIPTION
+This folder contains a fork of the [WildlifeConservationSocietyCL/spi](https://github.com/WildlifeConservationSocietyCI/spi) repository.
+In order to get this toolbox running on ArcGIS Pro, it has undergone several changes, including updating to arcpy.
+See CHANGELOG for more details.
 
-Please see the included Summed Point Influence 1.0 beta.pdf for documentation.
+## REPOSITORY STRUCTURE
 
-This repository is not yet maintained as a pip package; to install, clone or download.
+### v1.0beta/
+* This directory contains the Summed Point Influences tool v1.0 beta, written using arcgis 9.3 geoprocressing in 2011 and tweaked slightly in 2013.
+
+### working/
+* This directory contains the latest development of the Python-based ArcGIS toolbox.
+
+### CHANGELOG
+* The documentation of changes.
+
+### LICENSE
+* The software's original license.
+
+### README.md
+* This file
